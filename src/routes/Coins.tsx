@@ -11,11 +11,36 @@ interface ICoinInfo {
   change: string;
   change_rate: number;
 }
-const Container = styled.div``;
-const Header = styled.h1``;
-const CoinList = styled.ul``;
-const CoinListTitle = styled.h2``;
-const Coin = styled.li``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+`;
+const Header = styled.h1`
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 5rem;
+  width: 80%;
+  margin: 30px auto;
+  text-align: center;
+`;
+const CoinList = styled.ul`
+  margin: 20px 0;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const CoinListTitle = styled.h2`
+  font-size: 18px;
+`;
+const Coin = styled.li`
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+`;
 const Icon = styled.img`
   width: 20px;
   height: 20px;
@@ -41,7 +66,7 @@ function Coins() {
   console.log(upChangeRate);
   return (
     <Container>
-      <Header>코인</Header>
+      <Header>CryptoTraker</Header>
       <CoinList>
         <CoinListTitle>전일대비 시세 급등 코인 🔥</CoinListTitle>
         {upChangeRate?.map((coin) => (
@@ -52,7 +77,9 @@ function Coins() {
               }.png`}
             />{" "}
             <Name>{findKoreanName(coin.market)}</Name>
-            <Rate>{(coin.change_rate * 100).toFixed(2)} ▲</Rate>
+            <Rate style={{ color: "red" }}>
+              {(coin.change_rate * 100).toFixed(2)}% ▲
+            </Rate>
             <Market>{coin.market.split("-")[0]}</Market>
           </Coin>
         ))}
@@ -67,7 +94,9 @@ function Coins() {
               }.png`}
             />{" "}
             <Name>{findKoreanName(coin.market)}</Name>
-            <Rate>{(coin.change_rate * 100).toFixed(2)} ▼</Rate>
+            <Rate style={{ color: "blue" }}>
+              {(coin.change_rate * 100).toFixed(2)}% ▼
+            </Rate>
             <Market>{coin.market.split("-")[0]}</Market>
           </Coin>
         ))}
