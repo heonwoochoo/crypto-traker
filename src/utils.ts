@@ -9,3 +9,10 @@ export function getKoreanTime(time: string, date: string) {
   newDate.setHours(Number(timeArr[0]) + 9);
   return `${newDate.getHours()}:${timeArr[1]}:${timeArr[2]}`;
 }
+
+export function getDate(num: number) {
+  const date = new Date(num);
+  return `${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+}
