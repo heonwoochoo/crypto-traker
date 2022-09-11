@@ -57,9 +57,7 @@ const Value = styled.li`
 `;
 
 function CoinDetail({ coinId }: ICoinId) {
-  const name = useRecoilValue(targetCoin);
   const recent = useQuery<IRecent[]>([coinId], getRecentInfo);
-  console.log(recent.data);
   return (
     <>
       <RecentBox>

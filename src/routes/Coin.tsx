@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { targetCoin } from "../atom";
+import { marketName, targetCoin } from "../atom";
 import CoinDetail from "../components/CoinDetail";
 
 const Container = styled.div`
@@ -49,9 +49,11 @@ const GoHome = styled.svg`
 `;
 function Coin() {
   const { coinId } = useParams();
-  const name = useRecoilValue(targetCoin);
+  const target = useRecoilValue(targetCoin);
+  const setMarketName = useSetRecoilState(marketName);
   const navigate = useNavigate();
   const showChart = () => {
+    setMarketName(coinId);
     navigate(`${process.env.PUBLIC_URL}/${coinId}/chart`);
   };
   const showPrice = () => {
@@ -66,7 +68,7 @@ function Coin() {
         <Icon
           src={`https://static.upbit.com/logos/${coinId?.split("-")[1]}.png`}
         />
-        <Header>{name}</Header>
+        <Header>{target}</Header>
       </HeaderBox>
       {coinId && <CoinDetail coinId={coinId} />}
       <DetailBox>
